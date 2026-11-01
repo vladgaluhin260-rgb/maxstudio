@@ -3,421 +3,739 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MAK BEAUTY STUDIO</title>
-    
+    <title>Набор в клан ТТшники PUBG Mobile</title>
     <!-- Официальный скрипт Telegram Mini App -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0f0e0d',
-                            card: '#181615',
-                            gold: '#c5a059',
-                            goldHover: '#d4af37',
-                            textMuted: '#9e9892'
-                        }
-                    },
-                    fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
-                        sans: ['Montserrat', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .glass-panel {
-            background: rgba(24, 22, 21, 0.85);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(197, 160, 89, 0.2);
+        :root {
+            --bg-color: #0b0d14;
+            --card-bg: rgba(22, 27, 46, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-pink: #ff0055;
+            --accent-cyan: #00f2fe;
+            --accent-purple: #7928ca;
+            --accent-gold: #ffb703;
+            --input-bg: #121624;
+            --input-border: rgba(255, 255, 255, 0.12);
+            --radius-lg: 16px;
+            --radius-md: 10px;
         }
-        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #c5a059; border-radius: 4px; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 85, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.15) 0%, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            padding: 16px;
+            padding-bottom: 90px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Header Card */
+        .header-card {
+            background: linear-gradient(135deg, rgba(30, 15, 50, 0.9), rgba(15, 25, 45, 0.9));
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+
+        .header-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
+        }
+
+        .clan-title-box {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .clan-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(45deg, #ff0055, #4f46e5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .clan-info h1 {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #ffffff, #d1d5db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clan-badge {
+            background: rgba(255, 183, 3, 0.15);
+            color: var(--accent-gold);
+            border: 1px solid rgba(255, 183, 3, 0.3);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .clan-sub {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            padding: 10px;
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+
+        .stat-val {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            background: rgba(18, 22, 36, 0.8);
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(255, 0, 85, 0.3);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+        }
+
+        .section-header i {
+            color: var(--accent-pink);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .form-label span {
+            color: var(--accent-pink);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 14px 12px 40px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: var(--radius-md);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-pink);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* Dynamic Preview */
+        .preview-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px dashed var(--input-border);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #d1d5db;
+            white-space: pre-wrap;
+            margin-top: 14px;
+            display: none;
+        }
+
+        .preview-box.show {
+            display: block;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 0, 85, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.1s ease;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* Requirements List */
+        .req-list {
+            list-style: none;
+        }
+
+        .req-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,0.02);
+            padding: 10px 12px;
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .req-icon {
+            color: var(--accent-cyan);
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        .req-text h4 {
+            font-size: 13px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .req-text p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #10b981;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
-<body class="bg-brand-dark text-gray-200 font-sans antialiased pb-24 selection:bg-brand-gold selection:text-black">
+<body>
 
-    <!-- Mobile-optimized Top Header -->
-    <header class="sticky top-0 z-40 glass-panel px-4 py-3 flex items-center justify-between border-b border-brand-gold/20">
-        <div>
-            <h1 class="font-serif text-xl font-bold text-white tracking-wider">MAK BEAUTY</h1>
-            <p class="text-[9px] text-brand-gold uppercase tracking-[0.2em] -mt-1">ул. Челюскинцев, 37</p>
-        </div>
-        <div class="flex items-center gap-2">
-            <button onclick="openMyBookingsModal()" class="text-xs border border-brand-gold/40 text-brand-gold px-3 py-1.5 rounded-full uppercase tracking-wider">Мои записи</button>
-        </div>
-    </header>
-
-    <!-- Main Content Container -->
-    <main class="max-w-md mx-auto p-4 space-y-6">
-        
-        <!-- Welcome Banner -->
-        <div class="glass-panel p-5 rounded-3xl text-center relative overflow-hidden border border-brand-gold/30">
-            <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-brand-gold/10 rounded-full blur-xl"></div>
-            <span class="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-semibold">Студия красоты</span>
-            <h2 class="font-serif text-2xl text-white mt-1 mb-2">Онлайн-запись в один клик</h2>
-            <p class="text-xs text-brand-textMuted leading-relaxed mb-4">Выберите услугу и мастера, подстроимся под ваш график.</p>
-            <button onclick="openBookingModal()" class="w-full bg-brand-gold hover:bg-brand-goldHover text-black py-3 rounded-2xl font-semibold text-xs uppercase tracking-widest transition-all shadow-lg shadow-brand-gold/20">
-                Выбрать процедуру
-            </button>
-        </div>
-
-        <!-- Category Tabs -->
-        <div>
-            <div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
-                <button onclick="filterServices('all')" class="service-tab-btn active bg-brand-gold text-black px-4 py-2 rounded-full text-xs uppercase font-semibold whitespace-nowrap">Все</button>
-                <button onclick="filterServices('hair')" class="service-tab-btn bg-brand-card text-white border border-brand-gold/20 px-4 py-2 rounded-full text-xs uppercase whitespace-nowrap">Волосы</button>
-                <button onclick="filterServices('nails')" class="service-tab-btn bg-brand-card text-white border border-brand-gold/20 px-4 py-2 rounded-full text-xs uppercase whitespace-nowrap">Ногти</button>
-                <button onclick="filterServices('brows')" class="service-tab-btn bg-brand-card text-white border border-brand-gold/20 px-4 py-2 rounded-full text-xs uppercase whitespace-nowrap">Брови</button>
+<div class="container">
+    <!-- Header Banner -->
+    <div class="header-card">
+        <div class="clan-title-box">
+            <div class="clan-avatar">
+                <i class="fa-solid fa-dragon"></i>
+            </div>
+            <div class="clan-info">
+                <h1>ТТшники <span class="clan-badge">Ур. 10</span></h1>
+                <div class="clan-sub">Официальный Медиа-Клан PUBG Mobile</div>
             </div>
         </div>
 
-        <!-- Services List Grid -->
-        <div id="services-container" class="space-y-3"></div>
-
-        <!-- Masters Quick View -->
-        <div class="pt-4">
-            <h3 class="text-xs uppercase tracking-widest text-brand-gold font-semibold mb-3">Наши мастера</h3>
-            <div class="grid grid-cols-3 gap-3">
-                <div onclick="openBookingModal('Анна')" class="glass-panel p-3 rounded-2xl text-center cursor-pointer hover:border-brand-gold transition-all">
-                    <div class="w-12 h-12 mx-auto rounded-full bg-neutral-900 border border-brand-gold/40 flex items-center justify-center font-serif text-lg text-brand-gold mb-2">А</div>
-                    <div class="text-xs font-bold text-white">Анна</div>
-                    <div class="text-[9px] text-brand-textMuted">Волосы</div>
-                </div>
-                <div onclick="openBookingModal('Катя')" class="glass-panel p-3 rounded-2xl text-center cursor-pointer hover:border-brand-gold transition-all">
-                    <div class="w-12 h-12 mx-auto rounded-full bg-neutral-900 border border-brand-gold/40 flex items-center justify-center font-serif text-lg text-brand-gold mb-2">К</div>
-                    <div class="text-xs font-bold text-white">Катя</div>
-                    <div class="text-[9px] text-brand-textMuted">Волосы</div>
-                </div>
-                <div onclick="openBookingModal('Марина')" class="glass-panel p-3 rounded-2xl text-center cursor-pointer hover:border-brand-gold transition-all">
-                    <div class="w-12 h-12 mx-auto rounded-full bg-neutral-900 border border-brand-gold/40 flex items-center justify-center font-serif text-lg text-brand-gold mb-2">М</div>
-                    <div class="text-xs font-bold text-white">Марина</div>
-                    <div class="text-[9px] text-brand-textMuted">Ногти/Брови</div>
-                </div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-val" style="color: var(--accent-pink);">7 / 60</div>
+                <div class="stat-label">Места</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">79.8%</div>
+                <div class="stat-label">Рейтинг нед.</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-val">78.5%</div>
+                <div class="stat-label">Сезон</div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Fixed Bottom Action Bar for Mobile -->
-    <div class="fixed bottom-0 left-0 right-0 glass-panel p-3 border-t border-brand-gold/20 flex gap-3 max-w-md mx-auto z-40">
-        <button onclick="openAdminModal()" class="w-12 h-12 rounded-2xl bg-brand-card border border-brand-gold/30 text-brand-gold flex items-center justify-center text-lg" title="Панель мастера">⚙</button>
-        <button onclick="openBookingModal()" class="flex-1 bg-brand-gold hover:bg-brand-goldHover text-black font-bold py-3 rounded-2xl text-xs uppercase tracking-widest shadow-lg shadow-brand-gold/20 transition-all">
-            Записаться онлайн
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('apply', event)">
+            <i class="fa-solid fa-paper-plane"></i> Подать заявку
+        </button>
+        <button class="tab-btn" onclick="switchTab('requirements', event)">
+            <i class="fa-solid fa-list-check"></i> Требования
+        </button>
+        <button class="tab-btn" onclick="switchTab('media', event)">
+            <i class="fa-brands fa-tiktok"></i> Медиа & ТТ
         </button>
     </div>
 
-    <!-- Booking Modal -->
-    <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4">
-        <div class="glass-panel w-full max-w-lg rounded-t-3xl sm:rounded-3xl p-6 max-h-[90vh] flex flex-col overflow-y-auto">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="font-serif text-2xl text-white">Оформление записи</h3>
-                <button onclick="closeBookingModal()" class="text-gray-400 hover:text-white text-xl">✕</button>
+    <!-- TAB 1: FORM -->
+    <div id="tab-apply" class="content-section active">
+        <div class="card">
+            <div class="section-header">
+                <span><i class="fa-solid fa-id-card"></i> АНКЕТА КАНДИДАТА</span>
+                <span style="font-size: 11px; color: var(--text-muted);">Быстрый ответ</span>
             </div>
 
-            <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest text-brand-gold font-semibold mb-2">Выберите услуги:</label>
-                    <div id="modal-services-list" class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar pr-1"></div>
+            <form id="clanForm" onsubmit="handleBookingSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">1. Игровой Nickname <span>*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="nickname" class="form-control" placeholder="Например: WESTEMQ×TT" required>
+                    </div>
                 </div>
 
-                <div class="p-3 bg-brand-dark/90 rounded-xl border border-brand-gold/30 flex justify-between items-center text-xs">
-                    <div><span class="text-brand-textMuted">Итого:</span> <span id="selected-price" class="text-brand-gold font-bold text-base">0 BYN</span></div>
-                    <div><span class="text-brand-textMuted">Время:</span> <span id="selected-duration" class="text-white font-medium">0 мин</span></div>
+                <div class="form-group">
+                    <label class="form-label">2. Игровой ID <span>*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <input type="number" id="gameId" class="form-control" placeholder="Например: 5123456789" required>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest text-brand-gold font-semibold mb-1">Мастер:</label>
-                    <select id="master-select" onchange="renderTimeSlots()" required class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
-                        <option value="">-- Выберите мастера --</option>
-                    </select>
+                <div class="form-group">
+                    <label class="form-label">3. Ваш Telegram (для связи) <span>*</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-brands fa-telegram"></i>
+                        <input type="text" id="telegram" class="form-control" placeholder="@username" required>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest text-brand-gold font-semibold mb-1">Дата:</label>
-                    <input type="date" id="booking-date" onchange="renderTimeSlots()" required class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
+                <!-- ПОЛЕ TIKTOK (Текстовое, необязательное) -->
+                <div class="form-group">
+                    <label class="form-label">4. Ссылка на TikTok / Профиль <span style="color: var(--text-muted); font-weight: normal;">(если есть)</span></label>
+                    <div class="input-wrapper">
+                        <i class="fa-brands fa-tiktok"></i>
+                        <input type="text" id="tiktok" class="form-control" placeholder="Ссылка или 'нет'">
+                    </div>
                 </div>
 
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest text-brand-gold font-semibold mb-2">Окно времени:</label>
-                    <div id="time-slots-container" class="grid grid-cols-3 gap-2"></div>
-                    <input type="hidden" id="selected-time-slot">
-                </div>
-
-                <div class="space-y-2 pt-2">
-                    <input type="text" id="client-name" placeholder="Ваше имя" required class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
-                    <input type="tel" id="client-phone" placeholder="+375 (XX) XXX-XX-XX" required class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
-                </div>
-
-                <button type="submit" class="w-full bg-brand-gold hover:bg-brand-goldHover text-black font-bold py-3.5 rounded-xl text-xs uppercase tracking-widest transition-all">
-                    Отправить заявку
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- My Bookings Modal -->
-    <div id="my-bookings-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-6 relative">
-            <button onclick="closeMyBookingsModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">✕</button>
-            <h3 class="font-serif text-2xl text-white mb-2">Мои записи</h3>
-            <div class="flex gap-2 mb-4">
-                <input type="tel" id="lookup-phone" placeholder="+375..." class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
-                <button onclick="lookupBookings()" class="bg-brand-gold text-black px-4 py-3 rounded-xl font-bold text-xs">Найти</button>
-            </div>
-            <div id="my-bookings-list" class="space-y-2 max-h-60 overflow-y-auto"></div>
-        </div>
-    </div>
-
-    <!-- Admin Panel Modal -->
-    <div id="admin-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-6 relative">
-            <button onclick="closeAdminModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">✕</button>
-            <h3 class="font-serif text-2xl text-white mb-2">Панель мастера</h3>
-            <form onsubmit="saveMasterSchedule(event)" class="space-y-3">
-                <select id="admin-master" required class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
-                    <option value="Анна">Анна</option>
-                    <option value="Катя">Катя</option>
-                    <option value="Марина">Марина</option>
-                </select>
-                <input type="date" id="admin-date" required class="w-full bg-brand-dark border border-brand-gold/30 rounded-xl p-3 text-white text-xs">
-                <button type="submit" class="w-full bg-brand-gold text-black font-bold py-3 rounded-xl text-xs uppercase">Поставить выходной</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Core JS -->
-    <script>
-        const ADMIN_PIN = "1234";
-        const TELEGRAM_BOT_TOKEN = "9228881842:AAGxbfe2YzULhtz6wNFtQ2QilRiHK6oUwWs";
-        const TELEGRAM_CHAT_ID = "5070882729";
-
-        const tg = window.Telegram.WebApp;
-        try { tg.expand(); } catch(e) {}
-
-        const servicesData = [
-            { id: 1, category: 'hair', name: 'Женская стрижка и укладка', price: 45, duration: 60, masters: ['Анна', 'Катя'] },
-            { id: 2, category: 'hair', name: 'Сложное окрашивание (Airtouch)', price: 120, duration: 180, masters: ['Анна', 'Катя'] },
-            { id: 3, category: 'nails', name: 'Комплекс Маникюр + Гель-лак', price: 40, duration: 90, masters: ['Марина'] },
-            { id: 4, category: 'nails', name: 'Эстетический Педикюр', price: 50, duration: 90, masters: ['Марина'] },
-            { id: 5, category: 'brows', name: 'Коррекция и окрашивание бровей', price: 25, duration: 45, masters: ['Марина'] }
-        ];
-
-        let activeBookings = [];
-        let masterSchedules = [];
-        let selectedServiceIds = [];
-
-        function renderServices(filter = 'all') {
-            const container = document.getElementById('services-container');
-            container.innerHTML = '';
-            const filtered = filter === 'all' ? servicesData : servicesData.filter(s => s.category === filter);
-
-            filtered.forEach(s => {
-                container.innerHTML += `
-                    <div class="glass-panel p-4 rounded-2xl flex items-center justify-between">
-                        <div>
-                            <h4 class="font-serif text-base text-white">${sanitizeHTML(s.name)}</h4>
-                            <p class="text-[10px] text-brand-textMuted">~${s.duration} мин • ${s.masters.join(', ')}</p>
-                        </div>
-                        <div class="text-right">
-                            <span class="text-brand-gold font-bold text-sm block mb-1">${s.price} BYN</span>
-                            <button onclick="openBookingWithService(${s.id})" class="bg-brand-gold/20 hover:bg-brand-gold text-brand-gold hover:text-black border border-brand-gold/40 px-3 py-1 rounded-xl text-[10px] uppercase font-semibold transition-all">Выбрать</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">5. Возраст <span>*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-cake-candles"></i>
+                            <input type="number" id="age" class="form-control" placeholder="Лет" min="12" max="99" required>
                         </div>
                     </div>
-                `;
-            });
-        }
-
-        function filterServices(cat) {
-            document.querySelectorAll('.service-tab-btn').forEach(b => {
-                b.classList.remove('bg-brand-gold', 'text-black');
-                b.classList.add('bg-brand-card', 'text-white');
-            });
-            event.target.classList.remove('bg-brand-card', 'text-white');
-            event.target.classList.add('bg-brand-gold', 'text-black');
-            renderServices(cat);
-        }
-
-        function renderTimeSlots() {
-            const container = document.getElementById('time-slots-container');
-            const dateVal = document.getElementById('booking-date').value;
-            const masterVal = document.getElementById('master-select').value;
-            container.innerHTML = '';
-            document.getElementById('selected-time-slot').value = '';
-
-            if (!dateVal || !masterVal) {
-                container.innerHTML = '<span class="col-span-3 text-[10px] text-brand-textMuted italic">Выберите мастера и дату</span>';
-                return;
-            }
-
-            const schedule = masterSchedules.find(s => s.master === masterVal && s.date === dateVal);
-            if (schedule && schedule.isDayOff) {
-                container.innerHTML = '<span class="col-span-3 text-[10px] text-rose-400 font-semibold">У мастера выходной</span>';
-                return;
-            }
-
-            ['10:00', '12:00', '14:00', '16:00', '18:00'].forEach(t => {
-                const isTaken = activeBookings.some(b => b.master === masterVal && b.date === dateVal && b.time === t);
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                if (isTaken) {
-                    btn.className = 'p-2 rounded-xl bg-rose-950/20 border border-rose-500/30 text-rose-400 text-[11px]';
-                    btn.disabled = true;
-                    btn.innerText = `${t} (Зан.)`;
-                } else {
-                    btn.className = 'slot-btn p-2 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-emerald-300 text-[11px] hover:bg-emerald-500/30';
-                    btn.onclick = () => selectSlot(t, btn);
-                    btn.innerText = t;
-                }
-                container.appendChild(btn);
-            });
-        }
-
-        function selectSlot(time, element) {
-            document.querySelectorAll('.slot-btn').forEach(b => {
-                b.classList.remove('bg-brand-gold', 'text-black', 'border-brand-gold');
-            });
-            element.classList.add('bg-brand-gold', 'text-black', 'border-brand-gold');
-            document.getElementById('selected-time-slot').value = time;
-        }
-
-        function openBookingModal(preselectedMaster = null) {
-            document.getElementById('booking-modal').classList.remove('hidden');
-            renderModalServices();
-            updateMasterDropdown(preselectedMaster);
-            try {
-                if (tg.initDataUnsafe?.user?.first_name) {
-                    document.getElementById('client-name').value = tg.initDataUnsafe.user.first_name;
-                }
-            } catch(e){}
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('booking-date').min = today;
-            document.getElementById('booking-date').value = today;
-            renderTimeSlots();
-        }
-
-        function openBookingWithService(id) { selectedServiceIds = [id]; openBookingModal(); }
-        function closeBookingModal() { document.getElementById('booking-modal').classList.add('hidden'); selectedServiceIds = []; }
-
-        function renderModalServices() {
-            const list = document.getElementById('modal-services-list');
-            list.innerHTML = '';
-            servicesData.forEach(s => {
-                const checked = selectedServiceIds.includes(s.id) ? 'checked' : '';
-                list.innerHTML += `
-                    <label class="flex items-center justify-between p-2.5 rounded-xl bg-brand-dark/50 border border-brand-gold/10 cursor-pointer text-xs">
-                        <div class="flex items-center gap-2">
-                            <input type="checkbox" value="${s.id}" ${checked} onchange="toggleServiceSelection(${s.id})" class="accent-brand-gold">
-                            <span class="text-white">${sanitizeHTML(s.name)}</span>
+                    <div class="form-group">
+                        <label class="form-label">Прайм-тайм <span>*</span></label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-clock"></i>
+                            <select id="primetime" class="form-control" required style="padding-left: 36px; appearance: none;">
+                                <option value="16:00 - 20:00 МСК">16:00 - 20:00 МСК</option>
+                                <option value="19:00 - 23:00 МСК" selected>19:00 - 23:00 МСК</option>
+                                <option value="22:00+ МСК">22:00+ МСК</option>
+                                <option value="Любое время">Любое время</option>
+                            </select>
                         </div>
-                        <span class="text-brand-gold font-semibold">${s.price} BYN</span>
-                    </label>
-                `;
-            });
-            calculateTotals();
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <button type="button" class="btn-secondary" onclick="togglePreview()">
+                        <i class="fa-solid fa-eye"></i> Предпросмотр текста заявки
+                    </button>
+                    <div id="previewBox" class="preview-box"></div>
+                </div>
+
+                <div style="margin-top: 16px;">
+                    <button type="submit" id="submitBtn" class="btn-primary">
+                        <i class="fa-solid fa-paper-plane"></i> ОТПРАВИТЬ ЗАЯВКУ В ТЕЛЕГРАМ
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TAB 2: REQUIREMENTS -->
+    <div id="tab-requirements" class="content-section">
+        <div class="card">
+            <div class="section-header">
+                <span><i class="fa-solid fa-shield-halved"></i> КРИТЕРИИ ОТБОРА</span>
+            </div>
+
+            <ul class="req-list">
+                <li class="req-item">
+                    <i class="fa-solid fa-circle-check req-icon"></i>
+                    <div class="req-text">
+                        <h4>Уровень аккаунта 30+</h4>
+                        <p>Принимаются игроки с базовым опытом и прокачанным аккаунтом.</p>
+                    </div>
+                </li>
+                <li class="req-item">
+                    <i class="fa-solid fa-fire req-icon" style="color: var(--accent-pink);"></i>
+                    <div class="req-text">
+                        <h4>Высокий актив в игре</h4>
+                        <p>Регулярные онлайн-сессии, участие в клановых турнирах и учениях.</p>
+                    </div>
+                </li>
+                <li class="req-item">
+                    <i class="fa-solid fa-video req-icon" style="color: var(--accent-purple);"></i>
+                    <div class="req-text">
+                        <h4>Участие в съёмках</h4>
+                        <p>Желание снимать ролики для TikTok и участвовать в командных трендах.</p>
+                    </div>
+                </li>
+                <li class="req-item">
+                    <i class="fa-solid fa-comments req-icon" style="color: var(--accent-gold);"></i>
+                    <div class="req-text">
+                        <h4>Адекватность и микрофон</h4>
+                        <p>Умение общаться без токсичности, наличие рабочего Discord/ТГ голосовой связи.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TAB 3: MEDIA -->
+    <div id="tab-media" class="content-section">
+        <div class="card">
+            <div class="section-header">
+                <span><i class="fa-brands fa-tiktok"></i> НАШ TIKTOK КОНТЕНТ</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 14px;">
+                Мы делаем совместные нарезы, эдиты, клановые тренды и продвигаем аккаунты участников команды!
+            </p>
+            <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: var(--radius-md); border: 1px dashed var(--accent-pink); text-align: center;">
+                <i class="fa-solid fa-clapperboard" style="font-size: 24px; color: var(--accent-pink); margin-bottom: 6px;"></i>
+                <div style="font-size: 12px; font-weight: 700; color: #fff;">Каждый участник получает медиа-поддержку!</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast">
+    <i class="fa-solid fa-check-circle" id="toastIcon"></i>
+    <span id="toastMsg">Заявка отправлена!</span>
+</div>
+
+<script>
+    // ТОКЕН БОТА И ВАШ CHAT ID
+    const TELEGRAM_BOT_TOKEN = "9158129292:AAER7EjXp6FurLK1poyxMtvcZhhgyn0KwMg";
+    const TELEGRAM_CHAT_ID = "5070882729";
+
+    const tg = window.Telegram ? window.Telegram.WebApp : null;
+
+    if (tg) {
+        try { tg.expand(); } catch(e) {}
+        try { tg.setHeaderColor('#0b0d14'); } catch(e){}
+        
+        // Автозаполнение username
+        if (tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.username) {
+            document.getElementById('telegram').value = '@' + tg.initDataUnsafe.user.username;
         }
+    }
 
-        function toggleServiceSelection(id) {
-            selectedServiceIds.includes(id) ? selectedServiceIds = selectedServiceIds.filter(i => i !== id) : selectedServiceIds.push(id);
-            calculateTotals();
-            updateMasterDropdown();
-            renderTimeSlots();
+    // Защита от XSS
+    function sanitizeHTML(str) {
+        const div = document.createElement('div'); div.textContent = str; return div.innerHTML;
+    }
+
+    // Переключение вкладок
+    function switchTab(tabId, evt) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+
+        if (evt && evt.currentTarget) {
+            evt.currentTarget.classList.add('active');
         }
+        document.getElementById('tab-' + tabId).classList.add('active');
 
-        function calculateTotals() {
-            const sel = servicesData.filter(s => selectedServiceIds.includes(s.id));
-            document.getElementById('selected-price').innerText = `${sel.reduce((a,b)=>a+b.price,0)} BYN`;
-            document.getElementById('selected-duration').innerText = `${sel.reduce((a,b)=>a+b.duration,0)} мин`;
+        if (tg && tg.HapticFeedback) {
+            tg.HapticFeedback.impactOccurred('light');
         }
+    }
 
-        function updateMasterDropdown(forced = null) {
-            const select = document.getElementById('master-select');
-            select.innerHTML = '<option value="">-- Выберите мастера --</option>';
-            let masters = ['Анна', 'Катя', 'Марина'];
-            const sel = servicesData.filter(s => selectedServiceIds.includes(s.id));
-            if (sel.length > 0) masters = sel.map(s => s.masters).reduce((a,b) => a.filter(c => b.includes(c)));
-            masters.forEach(m => {
-                select.innerHTML += `<option value="${m}" ${forced===m?'selected':''}>${m}</option>`;
-            });
+    // Обработка TikTok
+    function formatTikTokValue(val) {
+        if (!val || val.trim() === '') return 'Нет';
+        const lower = val.trim().toLowerCase();
+        if (['нет', 'нету', 'нет профиля', 'нет аккаунта', '-', 'no'].includes(lower)) {
+            return 'Нет';
         }
+        return val.trim();
+    }
 
-        function sanitizeHTML(str) {
-            const div = document.createElement('div'); div.textContent = str; return div.innerHTML;
+    // Генерация текста заявки
+    function generateText() {
+        const nickname = document.getElementById('nickname').value.trim() || '—';
+        const gameId = document.getElementById('gameId').value.trim() || '—';
+        const telegram = document.getElementById('telegram').value.trim() || '—';
+        const tiktokRaw = document.getElementById('tiktok').value;
+        const tiktok = formatTikTokValue(tiktokRaw);
+        const age = document.getElementById('age').value.trim() || '—';
+        const primetime = document.getElementById('primetime').value;
+
+        return `📋 АНКЕТА КАНДИДАТА В КЛАН:\n` +
+               `1. Игровой Ник: ${nickname}\n` +
+               `2. Игровой ID: ${gameId}\n` +
+               `3. Telegram: ${telegram}\n` +
+               `4. Ссылка на TikTok: ${tiktok}\n` +
+               `5. Возраст / Прайм-тайм: ${age} лет / ${primetime}`;
+    }
+
+    // Предпросмотр
+    function togglePreview() {
+        const preview = document.getElementById('previewBox');
+        if (preview.classList.contains('show')) {
+            preview.classList.remove('show');
+        } else {
+            preview.innerText = generateText();
+            preview.classList.add('show');
         }
+    }
 
-        function handleBookingSubmit(e) {
-            e.preventDefault();
-            if (selectedServiceIds.length === 0) { alert('Выберите услугу.'); return; }
-            const timeSlot = document.getElementById('selected-time-slot').value;
-            if (!timeSlot) { alert('Выберите время.'); return; }
+    // Уведомление
+    function showToast(text, isError = false) {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        const toastIcon = document.getElementById('toastIcon');
+        
+        toastMsg.innerText = text;
+        toast.style.background = isError ? '#ef4444' : '#10b981';
+        toastIcon.className = isError ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-check-circle';
+        
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3500);
+    }
 
-            const booking = {
-                id: Date.now(),
-                master: document.getElementById('master-select').value,
-                date: document.getElementById('booking-date').value,
-                time: timeSlot,
-                client: sanitizeHTML(document.getElementById('client-name').value),
-                phone: document.getElementById('client-phone').value.replace(/[\s\()-]/g, ''),
-                serviceNames: servicesData.filter(s => selectedServiceIds.includes(s.id)).map(s => s.name).join(', ')
-            };
+    // ПРЯМАЯ ОТПРАВКА В TELEGRAM С КНОПКАМИ ПОДТВЕРДИТЬ / ОТКЛОНИТЬ
+    function handleBookingSubmit(e) {
+        e.preventDefault();
 
-            activeBookings.push(booking);
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
 
-            // Отправка в ТГ с кнопками Подтвердить / Отклонить
-            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: `✨ *Новая заявка через Mini App!*\n\n👤 *Имя:* ${booking.client}\n📞 *Телефон:* ${booking.phone}\n👩‍🦰 *Мастер:* ${booking.master}\n📅 *Дата:* ${booking.date}\n⏰ *Время:* ${booking.time}\n💅 *Услуги:* ${booking.serviceNames}`,
-                    parse_mode: 'Markdown',
-                    reply_markup: {
-                        inline_keyboard: [
-                            [
-                                { text: "✅ Подтвердить", callback_data: `confirm_${booking.id}` },
-                                { text: "❌ Отклонить", callback_data: `cancel_${booking.id}` }
-                            ]
+        const nickname = sanitizeHTML(document.getElementById('nickname').value.trim());
+        const gameId = sanitizeHTML(document.getElementById('gameId').value.trim());
+        const telegram = sanitizeHTML(document.getElementById('telegram').value.trim());
+        const tiktok = sanitizeHTML(formatTikTokValue(document.getElementById('tiktok').value));
+        const age = sanitizeHTML(document.getElementById('age').value.trim());
+        const primetime = sanitizeHTML(document.getElementById('primetime').value);
+
+        const bookingId = Date.now();
+
+        // Формирование красивого сообщения для Telegram
+        const messageText = `✨ *Новая заявка в клан ТТшники!*\n\n` +
+                            `👤 *Ник:* ${nickname}\n` +
+                            `🆔 *ID:* ${gameId}\n` +
+                            `📱 *Telegram:* ${telegram}\n` +
+                            `🎬 *TikTok:* ${tiktok}\n` +
+                            `⏰ *Возраст / Прайм-тайм:* ${age} лет (${primetime})`;
+
+        // Отправка в ТГ с кнопками Подтвердить / Отклонить
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: messageText,
+                parse_mode: 'Markdown',
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            { text: "✅ Подтвердить", callback_data: `confirm_${bookingId}` },
+                            { text: "❌ Отклонить", callback_data: `cancel_${bookingId}` }
                         ]
-                    }
-                })
-            }).catch(err => console.error(err));
-
-            alert(`Спасибо, ${booking.client}! Заявка отправлена мастеру.`);
-            closeBookingModal();
-            try { tg.close(); } catch(e){}
-        }
-
-        function openAdminModal() { if(prompt("PIN:")===ADMIN_PIN) document.getElementById('admin-modal').classList.remove('hidden'); }
-        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
-        function saveMasterSchedule(e) {
-            e.preventDefault();
-            masterSchedules.push({ master: document.getElementById('admin-master').value, date: document.getElementById('admin-date').value, isDayOff: true });
-            alert('Выходной сохранен!'); closeAdminModal();
-        }
-
-        function openMyBookingsModal() { document.getElementById('my-bookings-modal').classList.remove('hidden'); }
-        function closeMyBookingsModal() { document.getElementById('my-bookings-modal').classList.add('hidden'); }
-        function lookupBookings() {
-            const phone = document.getElementById('lookup-phone').value.replace(/[\s\()-]/g, '');
-            const list = document.getElementById('my-bookings-list'); list.innerHTML = '';
-            const found = activeBookings.filter(b => b.phone.includes(phone));
-            if(found.length === 0) { list.innerHTML = '<p class="text-xs text-brand-textMuted">Записей нет.</p>'; return; }
-            found.forEach(b => {
-                list.innerHTML += `<div class="p-3 bg-brand-dark rounded-xl text-xs text-white border border-brand-gold/20"><b>${b.master}</b> • ${b.date} в ${b.time}<br>${b.serviceNames}</div>`;
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => { renderServices('all'); });
-    </script>
+                    ]
+                }
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.ok) {
+                if (tg && tg.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('success');
+                }
+                showToast(`Спасибо, ${nickname}! Заявка отправлена лидеру.`);
+                setTimeout(() => {
+                    try { tg.close(); } catch(err){}
+                }, 1500);
+            } else {
+                throw new Error(data.description || 'Ошибка отправки');
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            if (tg && tg.HapticFeedback) {
+                tg.HapticFeedback.notificationOccurred('error');
+            }
+            showToast("Ошибка отправки! Убедитесь, что запустили бота в ТГ.", true);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> ОТПРАВИТЬ ЗАЯВКУ В ТЕЛЕГРАМ';
+        });
+    }
+</script>
 </body>
 </html>
